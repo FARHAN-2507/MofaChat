@@ -13,7 +13,8 @@ export default function AuthPage({ onClose }) {
   const googleBtnRef = useRef(null);
 
   useEffect(() => {
-    fetch('/api/auth/providers')
+    const base = import.meta.env.VITE_API_URL || '/api';
+    fetch(`${base}/auth/providers`)
       .then(r => r.json())
       .then(data => {
         if (data.google) {
@@ -53,7 +54,8 @@ export default function AuthPage({ onClose }) {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/auth/google', {
+      const base = import.meta.env.VITE_API_URL || '/api';
+      const res = await fetch(`${base}/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ credential: response.credential }),
