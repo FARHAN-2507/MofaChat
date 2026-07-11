@@ -11,8 +11,10 @@ client/node_modules/
 # Build output
 client/dist/
 
-# Graphite
-.graphite/
+# Graphify
+graphify-out/
+.graphify_*
+!graphify-out/**/.gitkeep
 
 # OS files
 .DS_Store
