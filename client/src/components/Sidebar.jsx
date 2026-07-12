@@ -38,8 +38,13 @@ export default function Sidebar({
   const { cycleMode, isDark, theme } = useTheme();
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
+  const [search, setSearch] = useState('');
 
-  const grouped = groupByDate(conversations);
+  const filtered = search.trim()
+    ? conversations.filter(c => c.title.toLowerCase().includes(search.toLowerCase()))
+    : conversations;
+
+  const grouped = groupByDate(filtered);
 
   const handleRename = (id) => {
     if (editTitle.trim()) {
@@ -55,7 +60,7 @@ export default function Sidebar({
         <div className="sidebar-brand">
           <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
             <rect width="32" height="32" rx="8" fill="#cc785c"/>
-            <text x="16" y="22" text-anchor="middle" fill="#fff" font-family="system-ui" font-weight="700" font-size="18">M</text>
+            <text x="16" y="22" textAnchor="middle" fill="#fff" fontFamily="system-ui" fontWeight="700" fontSize="18">M</text>
           </svg>
           <span className="sidebar-brand-text">Mofa</span>
         </div>
@@ -67,6 +72,26 @@ export default function Sidebar({
               </svg>
               New conversation
             </button>
+          </div>
+        )}
+        {isAuthenticated && (
+          <div className="sidebar-search">
+            <div className="sidebar-search-wrap">
+              <input
+                className="sidebar-search-input"
+                type="text"
+                placeholder="Search conversations..."
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+              {search && (
+                <button className="sidebar-search-clear" onClick={() => setSearch('')} title="Clear search">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
         )}
         <div className="sidebar-conversations">

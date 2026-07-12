@@ -45,6 +45,12 @@ export function AuthProvider({ children }) {
     setUser(null);
   }, []);
 
+  const refreshUser = useCallback(async () => {
+    if (!token) return;
+    const data = await getMe(token);
+    setUser(data.user);
+  }, [token]);
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -55,6 +61,7 @@ export function AuthProvider({ children }) {
       login,
       register,
       logout,
+      refreshUser,
     }}>
       {children}
     </AuthContext.Provider>

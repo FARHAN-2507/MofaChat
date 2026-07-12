@@ -24,6 +24,7 @@ function AppContent() {
     loadConversations,
     addMessage,
     updateLastMessage,
+    setMessages,
   } = useConversations();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -114,6 +115,7 @@ function AppContent() {
               messages={messages}
               onAddMessage={addMessage}
               onUpdateLastMessage={updateLastMessage}
+              onSetMessages={setMessages}
               onConversationUpdate={loadConversations}
               onLoadConversation={loadConversation}
               onNewConversation={newConversation}
@@ -130,7 +132,7 @@ function AppContent() {
             <div className="chat-empty-content">
               <svg width="40" height="40" viewBox="0 0 32 32" fill="none" style={{ margin: '0 auto 12px', display: 'block' }}>
                 <rect width="32" height="32" rx="8" fill="#cc785c"/>
-                <text x="16" y="22" text-anchor="middle" fill="#fff" font-family="system-ui" font-weight="700" font-size="18">M</text>
+                <text x="16" y="22" textAnchor="middle" fill="#fff" fontFamily="system-ui" fontWeight="700" fontSize="18">M</text>
               </svg>
               <h1 className="chat-empty-title">Mofa Chat</h1>
               <p className="chat-empty-subtitle">Sign in to start chatting</p>

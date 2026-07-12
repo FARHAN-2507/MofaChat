@@ -55,7 +55,7 @@ export function useConversations() {
       if (last && last.role === 'assistant') {
         updated[updated.length - 1] = { ...last, content };
       } else {
-        updated.push({ role: 'assistant', content, _temp: true });
+        updated.push({ role: 'assistant', content, _temp: true, createdAt: new Date().toISOString() });
       }
       return updated;
     });

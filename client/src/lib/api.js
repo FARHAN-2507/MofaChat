@@ -72,6 +72,14 @@ export async function updateSettings(settings) {
   return res.json();
 }
 
+export async function updateProfile(data) {
+  const res = await apiFetch(`${API_BASE}/auth/profile`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
 export function streamChat(conversationId, message, onChunk, onDone, onError) {
   const controller = new AbortController();
 

@@ -96,4 +96,18 @@ router.post('/google', async (req, res, next) => {
   }
 });
 
+router.put('/profile', requireAuth, async (req, res, next) => {
+  try {
+    const { name } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { name: name || '' },
+      { new: true }
+    );
+    res.json({ user: user.toJSON() });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
